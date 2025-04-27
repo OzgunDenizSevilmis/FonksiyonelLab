@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function PasswordResetScreen({ changeScreen }) {
   const [email, setEmail] = useState('');
@@ -14,39 +15,54 @@ export default function PasswordResetScreen({ changeScreen }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Şifremi Unuttum</Text>
-      <Text style={styles.subtitle}>Kayıtlı e-posta adresinizi girin</Text>
+    <LinearGradient colors={['#B5FFFC', '#FFDEE9']} style={styles.gradient}>
+      <View style={styles.container}>
+        
+        {/* ✉️ İKON */}
+        <Text style={styles.icon}>✉️</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="E-posta"
-        placeholderTextColor="#aaa"
-        value={email}
-        onChangeText={setEmail}
-      />
+        <Text style={styles.title}>Şifremi Unuttum</Text>
+        <Text style={styles.subtitle}>Kayıtlı e-posta adresinizi girin</Text>
 
-      <TouchableOpacity style={styles.button} onPress={handleReset}>
-        <Text style={styles.buttonText}>Sıfırlama Linki Gönder</Text>
-      </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="E-posta"
+          placeholderTextColor="#aaa"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
 
-      <TouchableOpacity onPress={() => changeScreen('Login')}>
-        <Text style={styles.link}>Giriş ekranına dön</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.button} onPress={handleReset}>
+          <Text style={styles.buttonText}>Sıfırlama Linki Gönder</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => changeScreen('Login')}>
+          <Text style={styles.link}>Giriş ekranına dön</Text>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30,
-    backgroundColor: '#f9f9f9',
+  },
+  icon: {
+    fontSize: 60,
+    marginBottom: 20,
   },
   title: {
     fontSize: 28, fontWeight: 'bold', color: '#6C63FF', marginBottom: 10,
   },
   subtitle: {
     fontSize: 16, color: '#666', marginBottom: 30,
+    textAlign: 'center',
   },
   input: {
     width: '100%', padding: 14, backgroundColor: '#fff',

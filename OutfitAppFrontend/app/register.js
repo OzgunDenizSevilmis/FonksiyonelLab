@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient'; // Gradient importu
 
 export default function RegisterScreen({ changeScreen }) {
   const [name, setName] = useState('');
@@ -8,38 +9,52 @@ export default function RegisterScreen({ changeScreen }) {
   const [password, setPassword] = useState('');
 
   const handleRegister = async () => {
-    if (!email || !password) {
+    if (!name || !surname || !email || !password) {
       alert('Lütfen tüm alanları doldurun.');
       return;
     }
   
     try {
-      const response = await fetch('http://127.0.0.1:5000/register', {
+      const response = await fetch('http://192.168.1.101:5001/register', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, surname, email, password }),
       });
   
-      const data = await response.json();
+      const text = await response.text();
+      console.log("🔵 Sunucu cevabı (ham):", text); // 🔥 Ekledik
+  
+      const data = text ? JSON.parse(text) : {};
+  
+      console.log("🟢 Status kod:", response.status);
+      console.log("🟢 Backend JSON:", data);
   
       if (response.ok) {
-        alert(data.message);
-        changeScreen('Login'); // Kayıt başarılıysa giriş ekranına dön
+        alert(data.message || "Kayıt başarılı!");
+        changeScreen('Login');
       } else {
-        alert(data.message); // Zaten kayıtlıysa vs.
+        alert(data.message || "Kayıt başarısız.");
       }
     } catch (error) {
       console.error('Hata:', error);
       alert('Sunucuya bağlanılamadı.');
     }
   };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>OutfitApp</Text>
-      <Text style={styles.subtitle}>Hesap Oluştur</Text>
+    <LinearGradient
+      colors={['#FF6B81', '#FF8C94', '#FFA3A5']}
+      style={styles.container}
+    >
+      <View style={styles.logoContainer}>
+        <Image
+          source={{ uri: 'https://cdn-icons-png.flaticon.com/512/892/892458.png' }}
+          style={styles.logo}
+        />
+        <Text style={styles.title}>OutfitApp</Text>
+        <Text style={styles.subtitle}>Hesap Oluştur</Text>
+      </View>
 
       <TextInput
         style={styles.input}
@@ -78,34 +93,63 @@ export default function RegisterScreen({ changeScreen }) {
       <TouchableOpacity onPress={() => changeScreen('Login')}>
         <Text style={styles.link}>Zaten hesabın var mı? Giriş yap</Text>
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, backgroundColor: '#f4f4f4',
-    justifyContent: 'center', alignItems: 'center', padding: 30,
+    flex: 1,
+    padding: 30,
+    justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    marginBottom: 15,
   },
   title: {
-    fontSize: 32, fontWeight: 'bold', color: '#FF6B81', marginBottom: 10,
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 5,
   },
   subtitle: {
-    fontSize: 16, color: '#777', marginBottom: 30,
+    fontSize: 16,
+    color: '#f1f1f1',
+    marginBottom: 20,
   },
   input: {
-    width: '100%', padding: 14,
-    backgroundColor: '#fff', borderRadius: 12,
-    borderWidth: 1, borderColor: '#ddd', marginBottom: 15, fontSize: 16
+    width: '100%',
+    padding: 14,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginBottom: 15,
+    fontSize: 16,
   },
   button: {
-    backgroundColor: '#FF6B81', paddingVertical: 14, borderRadius: 12,
-    width: '100%', alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingVertical: 14,
+    borderRadius: 12,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 10,
   },
   buttonText: {
-    color: '#fff', fontWeight: 'bold', fontSize: 16
+    color: '#FF6B81',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   link: {
-    color: '#FF6B81', marginTop: 20, fontSize: 14
+    color: '#fff',
+    marginTop: 20,
+    fontSize: 14,
+    textAlign: 'center',
   }
 });

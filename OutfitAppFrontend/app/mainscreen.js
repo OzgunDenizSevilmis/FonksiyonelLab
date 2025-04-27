@@ -1,54 +1,77 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MainScreen({ changeScreen }) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.welcome}>👋 Hoş Geldin!</Text>
-      <Text style={styles.title}>Bugünkü Kombin Önerin</Text>
+    <LinearGradient colors={['#FFDEE9', '#B5FFFC']} style={styles.gradient}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.welcome}>👋 Hoş Geldin!</Text>
+        <Text style={styles.title}>Bugünkü Kombin Önerin</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.label}>👕 Üst:</Text>
-        <Text style={styles.text}>Siyah Slim Fit Tişört</Text>
+        <View style={styles.card}>
+          <Text style={styles.label}>👕 Üst:</Text>
+          <Text style={styles.text}>Siyah Slim Fit Tişört</Text>
 
-        <Text style={styles.label}>👖 Alt:</Text>
-        <Text style={styles.text}>Gri Jogger Pantolon</Text>
+          <Text style={styles.label}>👖 Alt:</Text>
+          <Text style={styles.text}>Gri Jogger Pantolon</Text>
 
-        <Text style={styles.label}>👟 Ayakkabı:</Text>
-        <Text style={styles.text}>Beyaz Sneaker</Text>
+          <Text style={styles.label}>👟 Ayakkabı:</Text>
+          <Text style={styles.text}>Beyaz Sneaker</Text>
 
-        <Text style={styles.label}>🧢 Aksesuar:</Text>
-        <Text style={styles.text}>Sade Şapka & Saat</Text>
-      </View>
+          <Text style={styles.label}>🧢 Aksesuar:</Text>
+          <Text style={styles.text}>Sade Şapka & Saat</Text>
+        </View>
 
-      {/* 🔥 Profil Butonu */}
-      <TouchableOpacity style={styles.button} onPress={() => changeScreen('Profile')}>
-        <Text style={styles.buttonText}>Profilim</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity style={styles.button} onPress={() => changeScreen('Profile')}>
+          <Text style={styles.buttonText}>Profilim</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
-    backgroundColor: '#f0f4f8', padding: 20, flexGrow: 1, alignItems: 'center',
+    padding: 20,
+    flexGrow: 1,
+    alignItems: 'center',
   },
   welcome: {
-    fontSize: 20, color: '#888', marginBottom: 10,
+    fontSize: 20,
+    color: '#555',
+    marginBottom: 10,
+    fontWeight: '500',
   },
   title: {
-    fontSize: 26, fontWeight: 'bold', color: '#333', marginBottom: 20,
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
   },
   card: {
-    backgroundColor: '#fff', borderRadius: 15, padding: 20,
-    width: '100%', shadowColor: '#000', shadowOpacity: 0.1,
-    shadowRadius: 5, elevation: 3,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 20,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 6,
   },
   label: {
-    fontWeight: 'bold', fontSize: 16, marginTop: 10,
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 10,
+    color: '#444',
   },
   text: {
-    fontSize: 16, color: '#444', marginLeft: 5,
+    fontSize: 16,
+    color: '#666',
+    marginLeft: 5,
   },
   button: {
     marginTop: 30,
@@ -56,8 +79,14 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 12,
+    shadowColor: '#6C63FF',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
   },
   buttonText: {
-    color: '#fff', fontWeight: 'bold', fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   }
 });
