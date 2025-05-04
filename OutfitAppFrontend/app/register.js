@@ -13,24 +13,24 @@ export default function RegisterScreen({ changeScreen }) {
       alert('Lütfen tüm alanları doldurun.');
       return;
     }
-  
+
     try {
-      const response = await fetch('http://192.168.1.101:5001/register', { 
+      const response = await fetch('http://192.168.1.106:5001/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, surname, email, password }),
       });
-  
+
       const text = await response.text();
-      console.log("🔵 Sunucu cevabı (ham):", text); // 🔥 Ekledik
-  
+      console.log("🔵 Sunucu cevabı (ham):", text);
+
       const data = text ? JSON.parse(text) : {};
-  
+
       console.log("🟢 Status kod:", response.status);
       console.log("🟢 Backend JSON:", data);
-  
+
       if (response.ok) {
         alert(data.message || "Kayıt başarılı!");
         changeScreen('Login');
@@ -42,9 +42,10 @@ export default function RegisterScreen({ changeScreen }) {
       alert('Sunucuya bağlanılamadı.');
     }
   };
+
   return (
     <LinearGradient
-      colors={['#FF6B81', '#FF8C94', '#FFA3A5']}
+      colors={['#6C63FF', '#8A74FF', '#B59FFF']} // 🔵 Mavi tonlarda gradient
       style={styles.container}
     >
       <View style={styles.logoContainer}>
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonText: {
-    color: '#FF6B81',
+    color: '#6C63FF', // 🟣 Maviye uygun yazı rengi
     fontWeight: 'bold',
     fontSize: 16,
   },

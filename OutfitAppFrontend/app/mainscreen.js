@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MainScreen({ changeScreen }) {
   return (
-    <LinearGradient colors={['#FFDEE9', '#B5FFFC']} style={styles.gradient}>
+    <LinearGradient colors={['#6C63FF', '#8A74FF', '#B5AFFF']} style={styles.gradient}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.welcome}>👋 Hoş Geldin!</Text>
         <Text style={styles.title}>Bugünkü Kombin Önerin</Text>
@@ -42,14 +42,14 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
-    color: '#555',
+    color: '#f0f0f0',
     marginBottom: 10,
     fontWeight: '500',
   },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#fff',
     marginBottom: 20,
   },
   card: {
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
-    backgroundColor: '#6C63FF',
+    backgroundColor: '#fff',
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 12,
@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: '#6C63FF',
     fontWeight: 'bold',
     fontSize: 16,
   }
-});
+}); 

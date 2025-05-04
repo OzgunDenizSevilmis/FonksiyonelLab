@@ -14,7 +14,7 @@ export default function LoginScreen({ changeScreen }) {
     }
   
     try {
-      const response = await axios.post('http://192.168.1.101:5001/login', { email, password });
+      const response = await axios.post('http://192.168.1.106:5001/login', { email, password });
       if (response.status === 200) {
         alert('Giriş başarılı!');
         changeScreen('Main');
